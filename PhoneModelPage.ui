@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
-    <height>506</height>
+    <width>835</width>
+    <height>464</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,7 +52,7 @@ font-size: 25pt;
     <string>Phone Name</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="phonenameText">
+  <widget class="QLineEdit" name="phoneNameText">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -69,7 +69,7 @@ font-size: 25pt;
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>240</y>
+     <y>300</y>
      <width>221</width>
      <height>51</height>
     </rect>
@@ -94,6 +94,86 @@ font-size: 25pt;
      <string>Manufacture</string>
     </property>
    </column>
+  </widget>
+  <widget class="QPushButton" name="phoneFinderScreen">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>160</y>
+     <width>141</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Screen Information</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="phoneFinderSpecs">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>200</y>
+     <width>141</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Phone Specs</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="phoneFinderAccess">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>240</y>
+     <width>141</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Find Accessories</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="phoneFinderStores">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>280</y>
+     <width>141</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Find Stores</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="phoneFindButton">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>230</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Find Phone</string>
+   </property>
   </widget>
  </widget>
  <resources/>
