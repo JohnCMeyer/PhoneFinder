@@ -1,0 +1,99 @@
+#!/bin/bash
+
+export PGPORT=8888 PGHOST=/tmp
+
+DB_HOME="$(dirname -- "${BASH_SOURCE[0]}")/PhoneFinderDB"
+DB_NAME="PhoneFinderDB"
+
+RunInitDB() {
+	echo ''
+	echo 'Initializing DataBase...'
+	echo ''
+	initdb "$DB_HOME"
+}
+
+StartServer() {
+	echo ''
+	echo 'Starting DataBase Server...'
+	echo ''
+	pg_ctl -D "$DB_HOME" -o "-k $PGHOST" start
+}
+
+RunCreateDB() {
+	echo ''
+	echo 'Creating DataBase...'
+	echo ''
+	createdb "$DB_NAME"
+}
+
+ConnectToDB() {
+	echo ''
+	echo 'Connecting to DataBase...'
+	echo ''
+	echo 'Enter your desired commands.'
+	echo "When done, type '$\q' or press CTRL+D."
+	echo ''
+	psql -d "$DB_NAME"
+}
+
+ShutDownDB() {
+	pg_ctl -D "$DB_HOME" stop
+}
+
+RunDBUI() {
+	echo ''
+	echo "Press enter to connect to DataBase, or enter 'q' to shutdown:"
+	read -r response
+	if [[ "$response" != "q" ]]; then
+		ConnectToDB
+	fi
+	echo ''
+	echo 'Press Enter to ShutDown the DataBase:'
+	read -rs
+	echo ''
+	echo 'Shutting-Down the DataBase...'
+	echo ''
+	ShutDownDB
+}
+
+WipeDB() {
+	echo 'WARNING:  ARE YOU SURE YOU WANT TO WIPE THE DATABASE?'
+	echo "Enter 'wipe' to wipe the DataBase: "
+	read -r response
+	if [[ "$response" == "wipe" ]]; then
+		trash-put "$DB_HOME"
+		rm -rf "$DB_HOME"
+		mkdir -p "$DB_HOME"
+	fi
+}
+
+echo "DataBase Port     = $PGPORT"
+echo "DataBase Host     = $PGHOST"
+echo "DataBase Location = $DB_HOME"
+echo "DataBase Name     = $DB_NAME"
+
+if (($# == 1)); then
+	mode=$1
+else
+	echo ''
+	echo 'Enter Command: [setup/start/connect/stop/wipe]'
+	read -r mode
+fi
+
+if [[ "$mode" == "setup" ]]; then
+	RunInitDB
+	StartServer
+	RunCreateDB
+	RunDBUI
+elif [[ "$mode" == "start" ]]; then
+	StartServer
+	RunDBUI
+elif [[ "$mode" == "connect" ]]; then
+	RunDBUI
+elif [[ "$mode" == "stop" ]]; then
+	ShutDownDB
+elif [[ "$mode" == "wipe" ]]; then
+	WipeDB
+else
+	echo 'Invalid Mode'
+fi
