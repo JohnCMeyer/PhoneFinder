@@ -50,19 +50,25 @@ class DataBase:
 		self.cur.execute(query)
 		return self._get_output()
 
-	def exec_single_value(self, query: str):
-		# Executes the query, returning a single value, or None if no result was found.
+	def exec_single_row(self, query: str):
+		# Executes the query, returning a single row (which can be unpacked), or None if no result was found.
 		try:
-			return next(self.exec(query))[0]
+			return next(self.exec(query))
 		except:
 			return None
 
+	def exec_single_value(self, query: str):
+		# Executes the query, returning a single value, or None if no result was found.
+		return self.exec_single_row(query)[0]
+
 	def exec_multi(self, queries: Union[str, Iterable[str]]):
+		# Executes multiple queries (if a str is given, smartly splits by ';'), returning the results.
 		if isinstance(queries, str):
 			queries = split_sql(queries)
 		return [self.exec(query) for query in queries]
 
 	def exec_file(self, file):
+		# Executes the queries in the file, returning the results.
 		with open(file, 'rt') as f:
 			queries = f.read()
 		return self.exec_multi(queries)
