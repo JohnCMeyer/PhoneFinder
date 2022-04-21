@@ -21,6 +21,13 @@ specsBool = False
 screenBool = False
 
 
+def set_first_row(tableWidget, row):
+	i = 0
+	for item in row:
+		tableWidget.setItem(0, i, QtWidgets.QTableWidgetItem(str(item)))
+		i += 1
+
+
 class Login(QDialog):
 	def __init__(self):
 		super(Login, self).__init__()
@@ -76,14 +83,15 @@ class PhoneModelPage(QDialog):
 		global accessoriesBool
 		global trackerIndex
 		global accessoriesIndex
-		if accessoriesBool == False:
+		if not accessoriesBool:
 			accessoriesIndex = trackerIndex + 1
 			trackerIndex += 1
 			accessoriesBool = True
-
 		accesspage = AccessoriesPage()
 		widget.addWidget(accesspage)
 		widget.setCurrentIndex(accessoriesIndex)
+		case, prot = db.exec_single_row(2, f"select HasCase, ScreenProtector from Accessories where ModelNumber = '{phoneNameModel}'")
+		set_first_row(accesspage.accesstableWidget, (case, prot))
 
 	def specsFunction(self):
 		global specsBool
@@ -94,10 +102,10 @@ class PhoneModelPage(QDialog):
 			specsIndex = trackerIndex + 1
 			trackerIndex += 1
 			specsBool = True
-
 		specspage = SpecsPage()
 		widget.addWidget(specspage)
 		widget.setCurrentIndex(specsIndex)
+
 
 	def screenFunction(self):
 		global screenBool
@@ -110,6 +118,9 @@ class PhoneModelPage(QDialog):
 		screenpage = ScreenPage()
 		widget.addWidget(screenpage)
 		widget.setCurrentIndex(screenIndex)
+		global phoneNameModel
+		getScreenType, getResolution, getAspect = db.exec_single_row(3, f"select ScreenType, Resolution, AspectRatio from ScreenType where ModelNumber = '{phoneNameModel}'")
+		set_first_row(screenpage.screentableWidget, (phoneNameModel, getScreenType, getResolution, getAspect))
 
 
 class StorePage(QDialog):
