@@ -53,7 +53,7 @@ class PhoneModelPage(QDialog):
 	def findPhoneFunction(self):
 		global phoneNameModel
 		phoneName = self.phoneNameText.text()
-		getPhoneModel, getManufacture = db.exec_single_row(2, f"select ModelNumber, Manufacturer from PhoneModel where PhoneName = '{phoneName}'")
+		getPhoneModel, getManufacture = db.exec_single_row(f"select ModelNumber, Manufacturer from PhoneModel where PhoneName = '{phoneName}'")
 		# getPhoneModel, getManufacture = db.exec_single_row(f"select ModelNumber, Manufacturer from PhoneModel where substring(PhoneName, 0, {len(phoneName)}) = '{phoneName}'")
 		if getPhoneModel is not None and getManufacture is not None:
 			phoneNameModel = getPhoneModel
