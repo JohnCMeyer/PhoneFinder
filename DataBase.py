@@ -1,5 +1,5 @@
 #!/bin/python
-
+from itertools import repeat
 from os import environ
 from pathlib import Path
 from subprocess import DEVNULL, run, STDOUT
@@ -57,12 +57,25 @@ class DataBase:
 		except:
 			return None
 
+	def exec_single_row(self, num_values: int, query: str):
+		# Executes the query, returning a single row, or None if no result was found.
+		# This is designed for conveniently unpacking the row into a variable per value.
+		try:
+			row = next(self.exec(query))
+			if len(row) == num_values:
+				return row
+		except:
+			pass
+		return repeat(None, num_values)
+
 	def exec_multi(self, queries: Union[str, Iterable[str]]):
+		# Executes multiple queries (if a str is given, smartly splits by ';'), returning the results.
 		if isinstance(queries, str):
 			queries = split_sql(queries)
 		return [self.exec(query) for query in queries]
 
 	def exec_file(self, file):
+		# Executes the queries in the file, returning the results.
 		with open(file, 'rt') as f:
 			queries = f.read()
 		return self.exec_multi(queries)

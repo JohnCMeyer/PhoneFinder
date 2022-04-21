@@ -1,9 +1,10 @@
 import sys
+
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication
+from PyQt5.QtWidgets import QApplication, QDialog
 from PyQt5.uic import loadUi
 
-from DataBase import DataBase, print_out
+from DataBase import DataBase
 
 storeIndex = 0
 accessoriesIndex = 0
@@ -52,6 +53,12 @@ class PhoneModelPage(QDialog):
 	def findPhoneFunction(self):
 		global phoneNameModel
 		phoneName = self.phoneNameText.text()
+		getPhoneModel, getManufacture = db.exec_single_row(2, f"select ModelNumber, Manufacturer from PhoneModel where PhoneName = '{phoneName}'")
+		# getPhoneModel, getManufacture = db.exec_single_row(f"select ModelNumber, Manufacturer from PhoneModel where substring(PhoneName, 0, {len(phoneName)}) = '{phoneName}'")
+		if getPhoneModel is not None and getManufacture is not None:
+			phoneNameModel = getPhoneModel
+			self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem(getPhoneModel))
+			self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem(getManufacture))
 
 	def storeFunction(self):
 		global storeBool
@@ -61,7 +68,6 @@ class PhoneModelPage(QDialog):
 			storeIndex = trackerIndex + 1
 			trackerIndex += 1
 			storeBool = True
-
 		storepage = StorePage()
 		widget.addWidget(storepage)
 		widget.setCurrentIndex(storeIndex)
