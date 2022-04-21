@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
-    <height>506</height>
+    <width>1000</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>420</x>
      <y>40</y>
      <width>116</width>
      <height>46</height>
@@ -36,10 +36,10 @@ font-size: 30pt;</string>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>110</y>
-     <width>731</width>
-     <height>211</height>
+     <x>70</x>
+     <y>150</y>
+     <width>841</width>
+     <height>301</height>
     </rect>
    </property>
    <column>
@@ -76,8 +76,8 @@ font-size: 30pt;</string>
   <widget class="QPushButton" name="storeBackButton">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>350</y>
+     <x>70</x>
+     <y>480</y>
      <width>91</width>
      <height>41</height>
     </rect>

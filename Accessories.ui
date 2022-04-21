@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>926</width>
-    <height>547</height>
+    <width>1000</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>20</y>
+     <x>300</x>
+     <y>40</y>
      <width>421</width>
      <height>51</height>
     </rect>
@@ -37,10 +37,10 @@ font-size: 30pt;
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>120</y>
-     <width>411</width>
-     <height>192</height>
+     <x>90</x>
+     <y>140</y>
+     <width>831</width>
+     <height>361</height>
     </rect>
    </property>
    <column>
@@ -57,8 +57,8 @@ font-size: 30pt;
   <widget class="QPushButton" name="accessoriesBackButton">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>330</y>
+     <x>90</x>
+     <y>520</y>
      <width>89</width>
      <height>41</height>
     </rect>
