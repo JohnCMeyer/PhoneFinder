@@ -33,7 +33,7 @@ font-size: 30pt;</string>
     <string>Screen Information</string>
    </property>
   </widget>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableWidget" name="screentableWidget">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -42,6 +42,11 @@ font-size: 30pt;</string>
      <height>171</height>
     </rect>
    </property>
+   <column>
+    <property name="text">
+     <string>ModelNumber</string>
+    </property>
+   </column>
    <column>
     <property name="text">
      <string>ScreenType</string>
