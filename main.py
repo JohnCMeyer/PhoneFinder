@@ -90,8 +90,8 @@ class PhoneModelPage(QDialog):
 		accesspage = AccessoriesPage()
 		widget.addWidget(accesspage)
 		widget.setCurrentIndex(accessoriesIndex)
-		case, prot = db.exec_single_row(2, f"select HasCase, ScreenProtector from Accessories where ModelNumber = '{phoneNameModel}'")
-		set_first_row(accesspage.accesstableWidget, (case, prot))
+		row = db.exec_single_row(2, f"select HasCase, ScreenProtector from Accessories where ModelNumber = '{phoneNameModel}'")
+		set_first_row(accesspage.accesstableWidget, row)
 
 	def specsFunction(self):
 		global specsBool
@@ -105,7 +105,8 @@ class PhoneModelPage(QDialog):
 		specspage = SpecsPage()
 		widget.addWidget(specspage)
 		widget.setCurrentIndex(specsIndex)
-
+		row = db.exec_single_row(6, f"select Storage, Dimensions, BatteryLife, Weight, Color, Cpu from Specs where ModelNumber = '{phoneNameModel}'")
+		set_first_row(specspage.tableWidget, row)
 
 	def screenFunction(self):
 		global screenBool
@@ -119,8 +120,8 @@ class PhoneModelPage(QDialog):
 		widget.addWidget(screenpage)
 		widget.setCurrentIndex(screenIndex)
 		global phoneNameModel
-		getScreenType, getResolution, getAspect = db.exec_single_row(3, f"select ScreenType, Resolution, AspectRatio from ScreenType where ModelNumber = '{phoneNameModel}'")
-		set_first_row(screenpage.screentableWidget, (phoneNameModel, getScreenType, getResolution, getAspect))
+		row = db.exec_single_row(3, f"select ScreenType, Resolution, AspectRatio from ScreenType where ModelNumber = '{phoneNameModel}'")
+		set_first_row(screenpage.screentableWidget, (phoneNameModel, *row))
 
 
 class StorePage(QDialog):
