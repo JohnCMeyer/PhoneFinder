@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication
 from PyQt5.uic import loadUi
 
-from DataBase import DataBase
+from DataBase import DataBase, print_out
 
 storeIndex = 0
 accessoriesIndex = 0
@@ -31,9 +31,12 @@ class Login(QDialog):
 		# make sure to do a if statement checking if user & pass are good if not try again
 		username = self.loginUserName.text()
 		password = self.loginPassWord.text()
-		phonepage = PhoneModelPage()
-		widget.addWidget(phonepage)
-		widget.setCurrentIndex(widget.currentIndex() + 1)
+		actual_password = db.exec_single_value(f"select Password from PhoneFinder where UserName = '{username}'")
+		# print(actual_password)
+		if password == actual_password:
+			phonepage = PhoneModelPage()
+			widget.addWidget(phonepage)
+			widget.setCurrentIndex(widget.currentIndex() + 1)
 
 
 class PhoneModelPage(QDialog):

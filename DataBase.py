@@ -46,8 +46,16 @@ class DataBase:
 			self._running = False
 
 	def exec(self, query: str):
+		# Executes the query, returning the results.
 		self.cur.execute(query)
 		return self._get_output()
+
+	def exec_single_value(self, query: str):
+		# Executes the query, returning a single value, or None if no result was found.
+		try:
+			return next(self.exec(query))[0]
+		except:
+			return None
 
 	def exec_multi(self, queries: Union[str, Iterable[str]]):
 		if isinstance(queries, str):
