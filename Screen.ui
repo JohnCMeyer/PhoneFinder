@@ -42,6 +42,11 @@ font-size: 30pt;</string>
      <height>171</height>
     </rect>
    </property>
+   <row>
+    <property name="text">
+     <string/>
+    </property>
+   </row>
    <column>
     <property name="text">
      <string>ModelNumber</string>
