@@ -51,6 +51,8 @@ class PhoneModelPage(QDialog):
 	def __init__(self):
 		super(PhoneModelPage, self).__init__()
 		loadUi("PhoneModelPage.ui", self)
+		self.tableWidget.setColumnWidth(0, 150)
+		self.tableWidget.setColumnWidth(1, 207)
 		self.phoneFinderStores.clicked.connect(self.storeFunction)
 		self.phoneFinderAccess.clicked.connect(self.accessFunction)
 		self.phoneFinderSpecs.clicked.connect(self.specsFunction)
@@ -96,7 +98,7 @@ class PhoneModelPage(QDialog):
 	def specsFunction(self):
 		global specsBool
 		global trackerIndex
-		global specsBool
+		global specsIndex
 		localSpecBool = specsBool
 		if specsBool == False:
 			specsIndex = trackerIndex + 1
@@ -128,12 +130,12 @@ class StorePage(QDialog):
 	def __init__(self):
 		super(StorePage, self).__init__()
 		loadUi("Stores.ui", self)
-		self.tableWidget.setColumnWidth(0, 250)
-		self.tableWidget.setColumnWidth(1, 250)
-		self.tableWidget.setColumnWidth(2, 400)
-		self.tableWidget.setColumnWidth(3, 300)
-		self.tableWidget.setColumnWidth(4, 250)
-		self.tableWidget.setColumnWidth(5, 250)
+		self.tableWidget.setColumnWidth(0, 100)
+		self.tableWidget.setColumnWidth(1, 100)
+		self.tableWidget.setColumnWidth(2, 250)
+		self.tableWidget.setColumnWidth(3, 150)
+		self.tableWidget.setColumnWidth(4, 150)
+		self.tableWidget.setColumnWidth(5, 87)
 		self.storeBackButton.clicked.connect(self.backButton)
 
 	def backButton(self):
@@ -156,6 +158,12 @@ class SpecsPage(QDialog):
 	def __init__(self):
 		super(SpecsPage, self).__init__()
 		loadUi("Specs.ui", self)
+		self.tableWidget.setColumnWidth(0, 100)
+		self.tableWidget.setColumnWidth(1, 150)
+		self.tableWidget.setColumnWidth(2, 100)
+		self.tableWidget.setColumnWidth(3, 150)
+		self.tableWidget.setColumnWidth(4, 150)
+		self.tableWidget.setColumnWidth(5, 178)
 		self.specsBackButton.clicked.connect(self.backButton)
 
 	def backButton(self):
@@ -167,6 +175,10 @@ class ScreenPage(QDialog):
 	def __init__(self):
 		super(ScreenPage, self).__init__()
 		loadUi("Screen.ui", self)
+		self.screentableWidget.setColumnWidth(0, 150)
+		self.screentableWidget.setColumnWidth(1, 150)
+		self.screentableWidget.setColumnWidth(2, 250)
+		self.screentableWidget.setColumnWidth(3, 185)
 		self.screenBackButton.clicked.connect(self.backButton)
 
 	def backButton(self):
