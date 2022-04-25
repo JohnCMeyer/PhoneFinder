@@ -78,6 +78,6 @@ INSERT INTO SoldAt(SoldAtModelNumber, StoreNameID)
 INSERT INTO PhoneFinder(UserID, UserName, Password)
 	VALUES(1, 'User1', 'pwd');
 INSERT INTO PhoneFinder(UserID, UserName, Password)
-	VALUES(2, 'testing', 'pwd');
+	VALUES(2, 'testing', 'secure');
 INSERT INTO Finds(ModelNumber, UserID)
 	VALUES('0001', 1);
