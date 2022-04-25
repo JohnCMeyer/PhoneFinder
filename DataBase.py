@@ -3,7 +3,7 @@ from itertools import repeat
 from os import environ
 from pathlib import Path
 from subprocess import DEVNULL, run, STDOUT
-from typing import AnyStr, Dict, Generator, Iterable, Optional, Union
+from typing import AnyStr, Dict, Generator, Iterable, List, Optional, Union
 
 from psycopg2 import connect
 from psycopg2._psycopg import connection, cursor

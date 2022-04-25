@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QDialog
 from PyQt5.uic import loadUi
 
+import ParseJSON
 from DataBase import DataBase
 
 storeIndex = 0
@@ -14,6 +15,7 @@ phoneIndex = 1
 loginIndex = 0
 trackerIndex = 1
 phoneNameModel = ""
+user_id = 0
 
 storeBool = False
 accessoriesBool = False
@@ -38,9 +40,10 @@ class Login(QDialog):
 
 	def loginFunction(self):
 		# make sure to do a if statement checking if user & pass are good if not try again
+		global user_id
 		username = self.loginUserName.text()
 		password = self.loginPassWord.text()
-		actual_password = db.exec_single_value(f"select Password from PhoneFinder where UserName = '{username}'")
+		user_id, actual_password = db.exec_single_row(2, f"select UserID, Password from PhoneFinder where UserName = '{username}'")
 		# print(actual_password)
 		if password == actual_password:
 			phonepage = PhoneModelPage()
@@ -62,21 +65,17 @@ class PhoneModelPage(QDialog):
 		self.phoneSignOut.clicked.connect(self.SignOutFunction)
 
 	def findPhoneFunction(self):
-		global phoneNameModel
+		global phoneNameModel, user_id
 		phoneName = self.phoneNameText.text()
 		getPhoneModel, getManufacture = db.exec_single_row(2, f"select ModelNumber, Manufacturer from PhoneModel where PhoneName = '{phoneName}'")
-		# getPhoneModel, getManufacture = db.exec_single_row(f"select ModelNumber, Manufacturer from PhoneModel where substring(PhoneName, 0, {len(phoneName)}) = '{phoneName}'")
 		if getPhoneModel is not None and getManufacture is not None:
 			phoneNameModel = getPhoneModel
 			self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem(getPhoneModel))
 			self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem(getManufacture))
+			# db.exec(ParseJSON.InsertStatements.insert_Finds((getPhoneModel, user_id)))
 
 	def storeFunction(self):
-		global storeBool
-		global storeIndex
-		global trackerIndex
-		global storepage
-		global phoneNameModel
+		global storeBool, storeIndex, trackerIndex, storepage, phoneNameModel
 		if storeBool == False:
 			storeIndex = trackerIndex + 1
 			trackerIndex += 1
@@ -100,10 +99,7 @@ class PhoneModelPage(QDialog):
 			
 
 	def accessFunction(self):
-		global accessoriesBool
-		global trackerIndex
-		global accessoriesIndex
-		global accesspage
+		global accessoriesBool, trackerIndex, accessoriesIndex, accesspage
 		if not accessoriesBool:
 			accessoriesIndex = trackerIndex + 1
 			trackerIndex += 1
@@ -115,10 +111,7 @@ class PhoneModelPage(QDialog):
 		set_first_row(accesspage.accesstableWidget, row)
 
 	def specsFunction(self):
-		global specsBool
-		global trackerIndex
-		global specsIndex
-		global specspage
+		global specsBool, trackerIndex, specsIndex, specspage
 		localSpecBool = specsBool
 		if specsBool == False:
 			specsIndex = trackerIndex + 1
@@ -131,10 +124,7 @@ class PhoneModelPage(QDialog):
 		set_first_row(specspage.tableWidget, row)
 
 	def screenFunction(self):
-		global screenBool
-		global screenIndex
-		global trackerIndex
-		global screenpage
+		global screenBool, screenIndex, trackerIndex, screenpage
 		if screenBool == False:
 			screenIndex = trackerIndex + 1
 			trackerIndex += 1
@@ -216,6 +206,12 @@ db = DataBase(host='/tmp', port=8888, db_name='PhoneFinderDB')
 db.start()
 db.exec_file('CreateTables.sql')
 db.exec_file('InsertTestData.sql')
+added_phone_names = []
+ParseJSON.add_funcs()
+db.exec_multi(ParseJSON.parse_files('phones', added_phone_names))
+print('Phones:')
+for name in added_phone_names:
+	print(name)
 app = QApplication(sys.argv)
 mainwindow = Login()
 widget = QtWidgets.QStackedWidget()
