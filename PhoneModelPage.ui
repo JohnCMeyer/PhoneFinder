@@ -95,7 +95,7 @@ font-size: 25pt;
    </column>
    <column>
     <property name="text">
-     <string>Manufacture</string>
+     <string>Manufacturer</string>
     </property>
    </column>
   </widget>
