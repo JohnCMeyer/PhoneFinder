@@ -52,7 +52,7 @@ class PhoneModelPage(QDialog):
 		super(PhoneModelPage, self).__init__()
 		loadUi("PhoneModelPage.ui", self)
 		self.tableWidget.setColumnWidth(0, 150)
-		self.tableWidget.setColumnWidth(1, 207)
+		self.tableWidget.setColumnWidth(1, 195)
 		self.phoneFinderStores.clicked.connect(self.storeFunction)
 		self.phoneFinderAccess.clicked.connect(self.accessFunction)
 		self.phoneFinderSpecs.clicked.connect(self.specsFunction)
@@ -81,6 +81,18 @@ class PhoneModelPage(QDialog):
 		storepage = StorePage()
 		widget.addWidget(storepage)
 		widget.setCurrentIndex(storeIndex)
+		tablerow = 0
+		self.tableWidget.setRowCount(10)
+		for row in db.exec(f"select Store.StoreNameID, StoreName, Address, City, State, Price from Store, SoldAt where SoldAt.ModelNumber = '{phoneNameModel}'"):
+			storepage.storeTableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(row[0]))
+			storepage.storeTableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
+			storepage.storeTableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
+			storepage.storeTableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(row[3]))
+			storepage.storeTableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(row[4]))
+			storepage.storeTableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+			tablerow+=1
+			
+			
 
 	def accessFunction(self):
 		global accessoriesBool
@@ -134,12 +146,12 @@ class StorePage(QDialog):
 	def __init__(self):
 		super(StorePage, self).__init__()
 		loadUi("Stores.ui", self)
-		self.tableWidget.setColumnWidth(0, 100)
-		self.tableWidget.setColumnWidth(1, 100)
-		self.tableWidget.setColumnWidth(2, 250)
-		self.tableWidget.setColumnWidth(3, 150)
-		self.tableWidget.setColumnWidth(4, 150)
-		self.tableWidget.setColumnWidth(5, 87)
+		self.storeTableWidget.setColumnWidth(0, 100)
+		self.storeTableWidget.setColumnWidth(1, 100)
+		self.storeTableWidget.setColumnWidth(2, 235)
+		self.storeTableWidget.setColumnWidth(3, 150)
+		self.storeTableWidget.setColumnWidth(4, 150)
+		self.storeTableWidget.setColumnWidth(5, 87)
 		self.storeBackButton.clicked.connect(self.backButton)
 
 	def backButton(self):
@@ -151,6 +163,8 @@ class AccessoriesPage(QDialog):
 	def __init__(self):
 		super(AccessoriesPage, self).__init__()
 		loadUi("Accessories.ui", self)
+		self.accesstableWidget.setColumnWidth(0, 265)
+		self.accesstableWidget.setColumnWidth(1, 260)
 		self.accessoriesBackButton.clicked.connect(self.backButton)
 
 	def backButton(self):

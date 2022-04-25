@@ -37,10 +37,10 @@ font-size: 30pt;
   <widget class="QTableWidget" name="accesstableWidget">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>140</y>
-     <width>831</width>
-     <height>361</height>
+     <x>240</x>
+     <y>120</y>
+     <width>531</width>
+     <height>301</height>
     </rect>
    </property>
    <row>
@@ -62,8 +62,8 @@ font-size: 30pt;
   <widget class="QPushButton" name="accessoriesBackButton">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>520</y>
+     <x>240</x>
+     <y>440</y>
      <width>89</width>
      <height>41</height>
     </rect>
