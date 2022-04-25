@@ -58,6 +58,7 @@ class PhoneModelPage(QDialog):
 		self.phoneFinderSpecs.clicked.connect(self.specsFunction)
 		self.phoneFinderScreen.clicked.connect(self.screenFunction)
 		self.phoneFindButton.clicked.connect(self.findPhoneFunction)
+		self.phoneSignOut.clicked.connect(self.SignOutFunction)
 
 	def findPhoneFunction(self):
 		global phoneNameModel
@@ -124,6 +125,9 @@ class PhoneModelPage(QDialog):
 		global phoneNameModel
 		row = db.exec_single_row(3, f"select ScreenType, Resolution, AspectRatio from ScreenType where ModelNumber = '{phoneNameModel}'")
 		set_first_row(screenpage.screentableWidget, (phoneNameModel, *row))
+		
+	def SignOutFunction(self):
+		widget.setCurrentIndex(0)
 
 
 class StorePage(QDialog):

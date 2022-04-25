@@ -179,6 +179,22 @@ font-size: 25pt;
     <string>Find Phone</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="phoneSignOut">
+   <property name="geometry">
+    <rect>
+     <x>880</x>
+     <y>730</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Sign Out</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
