@@ -17,7 +17,8 @@ CREATE TABLE Finds (
 CREATE TABLE Store (
 	StoreNameID CHAR(15) PRIMARY KEY,
 	StoreName VARCHAR(32),
-	City CHAR(15),
+	Address VARCHAR(64),
+	City VARCHAR(15),
 	State VARCHAR(15),
 	Price FLOAT
 );
@@ -35,7 +36,7 @@ CREATE TABLE Accessories (
 );
 CREATE TABLE ScreenType (
 	ModelNumber CHAR(15),
-	ScreenType CHAR(15),
+	ScreenType VARCHAR(15),
 	Resolution VARCHAR(32),
 	AspectRatio VARCHAR(32),
 	PRIMARY KEY(ModelNumber, ScreenType),
@@ -45,10 +46,10 @@ CREATE TABLE Specs (
 	ModelNumber CHAR(15),
 	Cpu VARCHAR(32),
 	Color VARCHAR(15),
-	Weight CHAR(6),
+	Weight VARCHAR(6),
 	BatteryLife VARCHAR(6),
 	Dimensions VARCHAR(32),
-	Storage CHAR(6),
+	Storage VARCHAR(6),
 	PRIMARY KEY(ModelNumber, CPU),
 	FOREIGN KEY(ModelNumber) REFERENCES PhoneModel ON DELETE CASCADE
 );
