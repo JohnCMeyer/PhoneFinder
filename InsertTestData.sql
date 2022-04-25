@@ -31,17 +31,17 @@ INSERT INTO Store(StoreNameID, StoreName, Address, City, State, Price)
 	VALUES('83042', 'T-Mobile', '777 S Mill Ave', 'Tempe', 'Arizona', 900.0);
 INSERT INTO Store(StoreNameID, StoreName, Address, City, State, Price)
 	VALUES('77272', 'Target', '1800 E Rio Salado', 'Tempe', 'Arizona', 750.0);
-INSERT INTO SoldAt(ModelNumber, StoreNameID)
+INSERT INTO SoldAt(SoldAtModelNumber, StoreNameID)
 	VALUES('0001', '01253');
-INSERT INTO SoldAt(ModelNumber, StoreNameID)
+INSERT INTO SoldAt(SoldAtModelNumber, StoreNameID)
 	VALUES('0001', '83042');
-INSERT INTO SoldAt(ModelNumber, StoreNameID)
+INSERT INTO SoldAt(SoldAtModelNumber, StoreNameID)
 	VALUES('0002', '77272');
-INSERT INTO SoldAt(ModelNumber, StoreNameID)
+INSERT INTO SoldAt(SoldAtModelNumber, StoreNameID)
 	VALUES('0003', '01253');
-INSERT INTO SoldAt(ModelNumber, StoreNameID)
+INSERT INTO SoldAt(SoldAtModelNumber, StoreNameID)
 	VALUES('0003', '83042');
-INSERT INTO SoldAt(ModelNumber, StoreNameID)
+INSERT INTO SoldAt(SoldAtModelNumber, StoreNameID)
 	VALUES('0003', '77272');
 
 INSERT INTO PhoneFinder(UserID, UserName, Password)

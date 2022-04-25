@@ -76,17 +76,19 @@ class PhoneModelPage(QDialog):
 		global storeIndex
 		global trackerIndex
 		global storepage
+		global phoneNameModel
 		if storeBool == False:
 			storeIndex = trackerIndex + 1
 			trackerIndex += 1
 			storeBool = True
 			storepage = StorePage()
 			widget.addWidget(storepage)
-			
+		
 		widget.setCurrentIndex(storeIndex)
 		tablerow = 0
+		storepage.storeTableWidget.setRowCount(0)
 		storepage.storeTableWidget.setRowCount(10)
-		for row in db.exec(f"select Store.StoreNameID, StoreName, Address, City, State, Price from Store, SoldAt where SoldAt.ModelNumber = '{phoneNameModel}'"):
+		for row in db.exec(f"SELECT Store.StoreNameID, StoreName, Address, City, State, Price FROM Store, SoldAt WHERE SoldAt.SoldAtModelNumber = '{phoneNameModel}' AND SoldAt.storeNameID = Store.storeNameID"):
 			storepage.storeTableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(row[0]))
 			storepage.storeTableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
 			storepage.storeTableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))

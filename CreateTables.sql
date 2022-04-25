@@ -23,9 +23,9 @@ CREATE TABLE Store (
 	Price FLOAT
 );
 CREATE TABLE SoldAt (
-	ModelNumber CHAR(15) REFERENCES PhoneModel(ModelNumber) ON DELETE CASCADE,
+	SoldAtModelNumber CHAR(15) REFERENCES PhoneModel(ModelNumber) ON DELETE CASCADE,
 	StoreNameID CHAR(15) REFERENCES Store(StoreNameID) ON DELETE CASCADE,
-	PRIMARY KEY(ModelNumber, StoreNameID)
+	PRIMARY KEY(SoldAtModelNumber, StoreNameID)
 );
 CREATE TABLE Accessories (
 	ModelNumber CHAR(15),
