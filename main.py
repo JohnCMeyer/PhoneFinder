@@ -21,6 +21,7 @@ specsBool = False
 screenBool = False
 
 
+
 def set_first_row(tableWidget, row):
 	i = 0
 	for item in row:
@@ -74,15 +75,17 @@ class PhoneModelPage(QDialog):
 		global storeBool
 		global storeIndex
 		global trackerIndex
+		global storepage
 		if storeBool == False:
 			storeIndex = trackerIndex + 1
 			trackerIndex += 1
 			storeBool = True
-		storepage = StorePage()
-		widget.addWidget(storepage)
+			storepage = StorePage()
+			widget.addWidget(storepage)
+			
 		widget.setCurrentIndex(storeIndex)
 		tablerow = 0
-		self.tableWidget.setRowCount(10)
+		storepage.storeTableWidget.setRowCount(10)
 		for row in db.exec(f"select Store.StoreNameID, StoreName, Address, City, State, Price from Store, SoldAt where SoldAt.ModelNumber = '{phoneNameModel}'"):
 			storepage.storeTableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(row[0]))
 			storepage.storeTableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
@@ -98,12 +101,13 @@ class PhoneModelPage(QDialog):
 		global accessoriesBool
 		global trackerIndex
 		global accessoriesIndex
+		global accesspage
 		if not accessoriesBool:
 			accessoriesIndex = trackerIndex + 1
 			trackerIndex += 1
 			accessoriesBool = True
-		accesspage = AccessoriesPage()
-		widget.addWidget(accesspage)
+			accesspage = AccessoriesPage()
+			widget.addWidget(accesspage)
 		widget.setCurrentIndex(accessoriesIndex)
 		row = db.exec_single_row(2, f"select HasCase, ScreenProtector from Accessories where ModelNumber = '{phoneNameModel}'")
 		set_first_row(accesspage.accesstableWidget, row)
@@ -112,13 +116,14 @@ class PhoneModelPage(QDialog):
 		global specsBool
 		global trackerIndex
 		global specsIndex
+		global specspage
 		localSpecBool = specsBool
 		if specsBool == False:
 			specsIndex = trackerIndex + 1
 			trackerIndex += 1
 			specsBool = True
-		specspage = SpecsPage()
-		widget.addWidget(specspage)
+			specspage = SpecsPage()
+			widget.addWidget(specspage)
 		widget.setCurrentIndex(specsIndex)
 		row = db.exec_single_row(6, f"select Storage, Dimensions, BatteryLife, Weight, Color, Cpu from Specs where ModelNumber = '{phoneNameModel}'")
 		set_first_row(specspage.tableWidget, row)
@@ -127,12 +132,13 @@ class PhoneModelPage(QDialog):
 		global screenBool
 		global screenIndex
 		global trackerIndex
+		global screenpage
 		if screenBool == False:
 			screenIndex = trackerIndex + 1
 			trackerIndex += 1
 			screenBool = True
-		screenpage = ScreenPage()
-		widget.addWidget(screenpage)
+			screenpage = ScreenPage()
+			widget.addWidget(screenpage)
 		widget.setCurrentIndex(screenIndex)
 		global phoneNameModel
 		row = db.exec_single_row(3, f"select ScreenType, Resolution, AspectRatio from ScreenType where ModelNumber = '{phoneNameModel}'")
