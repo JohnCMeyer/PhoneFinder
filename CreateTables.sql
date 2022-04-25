@@ -29,8 +29,8 @@ CREATE TABLE SoldAt (
 );
 CREATE TABLE Accessories (
 	ModelNumber CHAR(15),
-	HasCase BOOLEAN,
-	ScreenProtector BOOLEAN,
+	HasCase VARCHAR(32),
+	ScreenProtector VARCHAR(32),
 	PRIMARY KEY(ModelNumber, HasCase),
 	FOREIGN KEY(ModelNumber) REFERENCES PhoneModel ON DELETE CASCADE
 );
